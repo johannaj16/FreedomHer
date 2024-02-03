@@ -59,7 +59,7 @@ function Forums() {
       <div className="w-full">
         {loading ? (
           <div className="flex flex-col items-center py-36">
-            <AiOutlineLoading3Quarters />
+            <AiOutlineLoading3Quarters size={50} className=" animate-spin" />
           </div>
         ) : posts.length > 0 ? (
           <Posts posts={posts} />
