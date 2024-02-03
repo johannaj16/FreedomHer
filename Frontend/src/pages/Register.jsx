@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg"; // Import the icon to match the Login page
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function Register() {
@@ -8,6 +8,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isNotConfirmed, setIsNotConfirmed] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,8 +30,11 @@ function Register() {
         username,
         password,
       });
-      console.log("Server response:", response.data);
-      response.data;
+      if (response.status !== 200) {
+        console.error(`Received status code ${response.status}`);
+        return;
+      }
+      navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
       // Handle errors (like showing a message to the user)

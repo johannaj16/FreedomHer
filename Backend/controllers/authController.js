@@ -6,8 +6,10 @@ const { attachCookiesToResponse, createTokenUser } = require("../utils");
 const register = async (req, res) => {
   try {
     const { profileImage, username, password } = req.body;
-    
-    const alrExists = await userData.findOne(username);
+
+    const alrExists = await userData.findOne({ username });
+    console.log(alrExists);
+    console.log("hello");
     if (alrExists) {
       throw new Error("make a unique username");
     }
