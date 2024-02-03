@@ -21,8 +21,6 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/create" element={<Create />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
