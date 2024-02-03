@@ -6,6 +6,9 @@ const cors = require("cors");
 const Posts = require("./routes/route");
 const connectDB = require("./db/connect");
 const morgan = require("morgan");
+app.use(express.json()); //makes json readily available as javascript object in req.body
+const cookieParser = require("cookie-parser");
+app.use(cookieParser(process.env.JWT_SECRET));
 
 
 app.use(morgan("tiny"));
