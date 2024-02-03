@@ -4,7 +4,7 @@ import AddPost from '../components/AddPost';
 
         
         function Home() {
-          const[isModalOpen, setIsModalOpen] = useState(false);
+          const [isModalOpen, setIsModalOpen] = useState(false);
           
           return (
             <div>
@@ -24,7 +24,7 @@ import AddPost from '../components/AddPost';
 
               
               {/* {conditional render please <AddPost />} */}
-            {isModalOpen && <Add Post closeModal={() => setIsModalOpen(false)} />}
+            {isModalOpen && <AddPost setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}/>}
             </div>
   );
           }
