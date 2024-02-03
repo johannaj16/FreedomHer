@@ -1,16 +1,40 @@
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg"; // Import the icon to match the Login page
 import { Link } from "react-router-dom";
+import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const [isNotConfirmed, setIsNotConfirmed] = useState(false);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the signup logic here
-    console.log("Username:", username, "Email:", email, "Password:", password);
-    // Add your logic to handle user registration
+
+    if (username.length === 0) {
+      return;
+    }
+    // Check if passwords match
+    const passwordsMatch = password === confirmPassword;
+
+    // Update the confirmation state based on the match
+    setIsNotConfirmed(!passwordsMatch);
+
+    if (!passwordsMatch) {
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${BASE_URL}/api/v1/users/register`, {
+        username,
+        password,
+      });
+      console.log("Server response:", response.data);
+      response.data;
+    } catch (error) {
+      console.error("Registration error:", error);
+      // Handle errors (like showing a message to the user)
+    }
   };
 
   return (
@@ -38,15 +62,20 @@ function Register() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[rgba(82,182,232,0.3)] rounded-lg p-3 outline-none shadow-md text-pink-500"
+            className={`bg-[rgba(82,182,232,0.3)] rounded-lg p-3 outline-none shadow-md text-pink-500 ${
+              isNotConfirmed ? "border-2 border-red-500" : ""
+            }`}
           />
+
           <input
             type="password"
             id="confirmPassword"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="bg-[rgba(82,182,232,0.3)] rounded-lg p-3 outline-none shadow-md text-pink-500"
+            className={`bg-[rgba(82,182,232,0.3)] rounded-lg p-3 outline-none shadow-md text-pink-500 ${
+              isNotConfirmed ? "border-2 border-red-500" : ""
+            }`}
           />
           <button
             type="submit"
