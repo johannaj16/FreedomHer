@@ -39,6 +39,7 @@ const logout = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now()),
   });
+  res.status(200).json({ msg: "user logged out!" });
 };
 
 module.exports = {
