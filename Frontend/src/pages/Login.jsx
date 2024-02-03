@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,6 +39,19 @@ function Login() {
           <button className="bg-pink-600 rounded-lg p-3 text-xl font-bold text-white hover:bg-pink-700">
             login
           </button>
+          <div className=" border-b-2"></div>
+          <h2
+            className="flex gap-2 items-center justify-center
+          "
+          >
+            New here?
+            <Link
+              to="/register"
+              className="text-lg text-black hover:text-pink-600 hover:underline"
+            >
+              Register Account!
+            </Link>
+          </h2>
         </form>
       </div>
     </main>
