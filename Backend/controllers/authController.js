@@ -1,5 +1,5 @@
 const userData = require("../models/users");
-
+const CustomError = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 const { attachCookiesToResponse, createTokenUser } = require("../utils");
 
