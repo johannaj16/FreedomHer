@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-    //register,
+  //register,
 } = require("../controllers/postController");
 const router = express.Router();
 
