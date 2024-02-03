@@ -113,7 +113,7 @@ const addUpVote = async (req, res) => {
 const editPost = async (req, res) => {
     const { id } = req.params;
     
-    const alrExists = await mongoose.Types.ObjectId.isValid(id)
+    const alrExists = await mongoose.Types.ObjectId.isValid(id);
     if (alrExists) {
       return res.status(200).json({ Error: "Post can't be found" });
     }
