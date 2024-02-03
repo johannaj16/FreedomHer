@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const Posts = require("./routes/route");
+
 const connectDB = require("./db/connect");
 const morgan = require("morgan");
 app.use(express.json()); //makes json readily available as javascript object in req.body
@@ -12,7 +12,12 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 app.use(morgan("tiny"));
 app.use(cors());
+
+const Posts = require("./routes/route");
 app.use("/api/v1/posts", Posts);
+
+const User = require("./routes/authRoutes");
+app.use("/api/v1/users", User);
 
 const port = process.env.PORT || 4000;
 
