@@ -23,6 +23,9 @@ jobs:
       - name: Change to frontend
         run: cd Frontend
 
+      - name: list the file path
+        run: ls
+
       - name: Install dependencies
         run: npm install # Using npm instead of yarn
 
