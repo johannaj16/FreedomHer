@@ -28,7 +28,7 @@ function Home() {
       </button>
 
       {/* {conditional render please <AddPost />} */}
-      {isModalOpen && <Add Post closeModal={() => setIsModalOpen(false)} />}
+      {isModalOpen && <AddPost isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeModal={() => setIsModalOpen(false)} />}
     </div>
   );
 }
