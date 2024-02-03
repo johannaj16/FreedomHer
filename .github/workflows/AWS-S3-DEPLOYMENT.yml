@@ -38,5 +38,5 @@ jobs:
           invalidation: /*
           delete-removed: true
           no-cache: true
-          private: false
-          files-to-include: "{.*/**,**}"
+          private: true
+          filesToInclude: "{.*/**,**}"
