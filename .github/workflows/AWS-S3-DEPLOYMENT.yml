@@ -1,0 +1,48 @@
+name: Node.js S3 Deployment
+
+on:
+  push:
+    branches:
+      - main # Replace with your deployment branch if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # Specify your Node.js version here
+
+      - name: Install dependencies
+        run: npm install # Using npm instead of yarn
+
+      - name: Build
+        run: npm run build # Make sure your package.json has a "build" script
+
+      - name: Deploy to S3
+        uses: reggionick/s3-deploy@v4
+        with:
+          folder: build # Update if your build directory is different
+          bucket: ${{ secrets.S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          invalidation: /
+          delete-removed: true
+          no-cache: true
+          private: true
+          files-to-include: "{.*/**,**}"
+
+      # Optional: Add a notification step here
+      - name: Notify Slack
+        if: success() || failure()
+        uses: some/slack-notification-action@v1 # Replace with your desired action
+        with:
+          status: ${{ job.status }}
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
