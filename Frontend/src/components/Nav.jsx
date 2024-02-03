@@ -13,7 +13,7 @@ function Nav() {
   };
 
   return (
-    <nav className=" bg-pink-600 p-5 px-8 font-herfonty shadow-lg">
+    <nav className="bg-[rgba(132,62,250,0.2)] p-5 px-8 font-herfonty shadow-lg">
       <div className="flex items-center justify-between">
         <Link
           to="/"
