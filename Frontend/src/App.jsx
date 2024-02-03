@@ -11,8 +11,6 @@ import Register from "../src/pages/Register";
 import Nav from "../src/components/Nav";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <div className="sticky top-0 z-50">
