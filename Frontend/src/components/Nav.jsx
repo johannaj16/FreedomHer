@@ -17,7 +17,7 @@ function Nav() {
       <div className="flex items-center justify-between">
         <Link
           to="/"
-          className="text-white text-5xl font-semibold flex items-center"
+          className="text-purple text-4xl font-semibold flex items-center"
         >
           <img
             src={freedomfairy}
@@ -28,8 +28,8 @@ function Nav() {
         <ul className="hidden md:flex items-center md:gap-10 lg:gap-14">
           <li>
             <Link
-              to="/"
-              className="text-white hover:underline text-2xl lg:text-3xl"
+              to="/home"
+              className="text-purple hover:underline text-2xl lg:text-2xl"
             >
               Home
             </Link>
@@ -37,7 +37,7 @@ function Nav() {
           <li>
             <Link
               to="/forum"
-              className="text-white hover:underline text-2xl lg:text-3xl"
+              className="text-purple hover:underline text-2xl lg:text-2xl"
             >
               Forum
             </Link>
@@ -45,7 +45,7 @@ function Nav() {
           <li>
             <Link
               to="/about"
-              className="text-white hover:underline text-2xl lg:text-3xl"
+              className="text-purple hover:underline text-2xl lg:text-2xl"
             >
               About
             </Link>
@@ -53,7 +53,7 @@ function Nav() {
           <li>
             <Link
               to="/Login"
-              className="text-white hover:underline text-2xl lg:text-3xl"
+              className="text-purple hover:underline text-2xl lg:text-2xl"
             >
               Login
             </Link>
