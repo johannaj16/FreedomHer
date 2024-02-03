@@ -4,17 +4,15 @@ const { StatusCodes } = require("http-status-codes");
 const { attachCookiesToResponse, createTokenUser } = require("../utils");
 
 const register = async (req, res) => {
-  try
-  {
+  try {
     const { profileImage, username, password } = req.body;
 
     const user = await userData.create({ profileImage, username, password });
     const tokenUser = createTokenUser(user);
-  
+
     attachCookiesToResponse({ res, user: tokenUser });
     res.status(200).json({ user: tokenUser });
-  }
-  catch (error) {
+  } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
@@ -30,7 +28,7 @@ const login = async (req, res) => {
     throw new CustomError.UnauthenticatedError("Invalid Credentials");
   }
   const user = await userData.findOne({ username });
-  const isPasswordCorrect = await userData.comparePassword(password);
+  const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
     throw new CustomError.UnauthenticatedError("Invalid Credentials");
   }
