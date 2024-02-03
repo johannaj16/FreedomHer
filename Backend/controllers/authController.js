@@ -4,13 +4,19 @@ const { StatusCodes } = require("http-status-codes");
 const { attachCookiesToResponse, createTokenUser } = require("../utils");
 
 const register = async (req, res) => {
-  const { profileImage, username, password } = req.body;
+  try
+  {
+    const { profileImage, username, password } = req.body;
 
-  const user = await userData.create({ profileImage, username, password });
-  const tokenUser = createTokenUser(user);
-
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(200).json({ user: tokenUser });
+    const user = await userData.create({ profileImage, username, password });
+    const tokenUser = createTokenUser(user);
+  
+    attachCookiesToResponse({ res, user: tokenUser });
+    res.status(200).json({ user: tokenUser });
+  }
+  catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 const login = async (req, res) => {
