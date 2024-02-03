@@ -13,7 +13,7 @@ function Nav() {
   };
 
   return (
-    <nav className="bg-[rgba(132,62,250,0.2)] p-5 px-8 font-herfonty shadow-lg">
+    <nav className="bg-[rgba(132,62,250,0.2)] p-5 px-8 font-herfonty shadow-lg backdrop-blur-lg">
       <div className="flex items-center justify-between">
         <Link
           to="/"
@@ -70,11 +70,11 @@ function Nav() {
       <div
         className={
           Navbar
-            ? "fixed left-0 top-0 w-[40%] h-full  pl-4 text-white  bg-white/10 pt-3 backdrop-blur-md ease-in-out duration-300 z-50 md:hidden"
-            : "fixed left-[-100%] top-0 w-[40%] h-full  text-white  bg-white/10 pt-3 backdrop-blur-md  ease-in-out duration-300 z-50 md:hidden"
+            ? "fixed left-0 top-0 w-[40%] min-h-screen pl-4 text-white  bg-white/10 pt-3 backdrop-blur-md ease-in-out duration-300 z-50 md:hidden"
+            : "fixed left-[-100%] top-0 w-[40%] min-h-screen  text-white  bg-white/10 pt-3 backdrop-blur-md  ease-in-out duration-300 z-50 md:hidden"
         }
       >
-        <ul className="uppercase flex flex-col gap-5 font-herfont pt-8">
+        <ul className="uppercase flex flex-col gap-5 font-herfont pt-8 text-2xl">
           <li>
             <Link to="/" className="text-white hover:underline">
               Home
