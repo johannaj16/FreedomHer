@@ -5,9 +5,15 @@ const app = express();
 const cors = require("cors");
 const Posts = require("./routes/route");
 const connectDB = require("./db/connect");
+const morgan = require("morgan");
 
+
+app.use(morgan("tiny"));
 app.use(cors());
 app.use("/api/v1/posts", Posts);
+  
+
+
 const port = process.env.PORT || 4000;
 
 const start = async () => {
