@@ -13,11 +13,15 @@ app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
 app.use(cors());
 
-const Posts = require("./routes/route");
+// const Posts = require("./routes/route");
+// app.use("/api/v1/posts", Posts);
+
+const Posts = require("./routes/postRoutes");
 app.use("/api/v1/posts", Posts);
 
 const User = require("./routes/authRoutes");
 app.use("/api/v1/users", User);
+
 
 const port = process.env.PORT || 4000;
 

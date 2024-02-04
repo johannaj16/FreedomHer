@@ -15,9 +15,14 @@ const getAllPosts = async (req, res) => {
 
 //get a specific post
 const getPost = async (req, res) => {
-    const { id } = req.params;
-    const posts = await postData.findById(id);
-    return res.status(200).json(posts);
+    try{
+        const { id } = req.params;
+        const posts = await postData.findById(id);
+        return res.status(200).json(posts);
+      }
+    catch (error) {
+    res.status(400).json({ error: error.message });
+    }
   };
 
 //makes a post
@@ -44,7 +49,7 @@ const makePost = async (req, res) => {
     const { title, content, genre, comments } = req.body; //req.body is params coming in from front end
     vote = 0;
     try {
-      const post = await postData.create({
+      const post = await Post.create({
         title,
         content,
         vote,
@@ -66,7 +71,7 @@ const addUpVote = async (req, res) => {
     try {
         const {title, content, vote, genre, comments} = req.body;
     
-      const post = await postData.findOneAndUpdate(
+      const post = await Post.findOneAndUpdate(
         { _id: id },
         {
           title, content, vote: vote + 1, genre, comments
@@ -199,47 +204,12 @@ const likePost = async (req, res) => {
   res.status(StatusCodes.OK).json({ jsonPost });
 };
 
-//Unliking controller
-const unlikePost = async (req, res) => {
-  const { userId } = req.user;
-  const { id: post_id } = req.params;
-  const { type } = req.query;
-  const post = await Post.findOne({ _id: post_id });
-  if (!type) {
-    throw new CustomError.BadRequestError(
-      "Please specify whether you want to like or dislike"
-    );
-  }
-
-  if (!post) {
-    throw new CustomError.NotFoundError(
-      `Post wasnt found with id : ${post_id} `
-    );
-  }
-
-  if (post.likes.includes(userId)) {
-    post.likes.pull(userId);
-    await post.save();
-    res.status(204).end();
-  }
-
-  if (type === "dislike" && post.dislikes.includes(userId)) {
-    post.dislikes.pull(userId);
-    await post.save();
-    res.status(204).json({ msg: "removed dislike" });
-  }
-
-  throw new CustomError.NotFoundError(
-    "Likes and Dislikes doesn't contain user"
-  );
-};
 
 module.exports = {
   getAllPosts,
   makePost,
   getPost,
-  updatePost,
   deletePost,
   likePost,
-  unlikePost,
+  addUpVote,
 };
