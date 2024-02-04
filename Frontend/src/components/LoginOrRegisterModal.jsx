@@ -1,7 +1,19 @@
 import React from "react";
 import { IoMdClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function LoginOrRegisterModal({ isModalOpen, setIsModalOpen }) {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Define navigation functions
+  const navigateToLogin = () => {
+    navigate("/login"); // Navigate to the login route
+  };
+
+  const navigateToRegister = () => {
+    navigate("/register"); // Navigate to the register route
+  };
+
   return (
     <div className={`modal ${isModalOpen ? "visible" : "hidden"}`}>
       <div className="absolute flex flex-col fixed w-4/5 md:w-3/5 mx-auto pb-8 inset-6 justify-center items-center rounded-3xl bg-[rgba(132,62,250,0.2)] backdrop-blur-lg opacity-98 font-herfonty z-50">
@@ -17,11 +29,17 @@ function LoginOrRegisterModal({ isModalOpen, setIsModalOpen }) {
           <p className="mb-4">
             To add a post, please log in or register an account.
           </p>
-          <button className="bg-white text-black py-2 px-4 rounded">
+          <button
+            className="bg-white text-black py-2 px-4 rounded"
+            onClick={navigateToLogin}
+          >
             Login
           </button>
           <span className="mx-2">or</span>
-          <button className="bg-white text-black py-2 px-4 rounded">
+          <button
+            className="bg-white text-black py-2 px-4 rounded"
+            onClick={navigateToRegister}
+          >
             Register
           </button>
         </div>
