@@ -14,7 +14,6 @@ function SpecificPost() {
 
   useEffect(() => {
     setLoading(true);
-    console.log("yo");
     axios
       .get("http://localhost:4000/api/v1/posts/comment/" + id)
       .then((response) => {
@@ -70,8 +69,7 @@ function SpecificPost() {
             <p className=" rounded-xl text-2xl py-3">{post.content}</p>
           </div>
           <CommentCreator />
-          {console.log(post.comments + "This should be here")}
-          <Comments comments={post.comments} />
+          {/* <Comments comments={post.comments} /> */}
         </>
       )}
     </>

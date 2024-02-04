@@ -1,16 +1,18 @@
 import React from "react";
 
 function CommentCreator() {
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
     console.log("something");
+    e.preventDefault(); //prevent page referesh
   };
+
 
   return (
     <>
       <div>
         <form className="flex flex-row md:items-start items-center p-10 text-xl">
           <textarea
-            class="bg-gray-100 shadow-lg rounded font-herfonty resize-none w-full h-20 p-3 placeholder-gray-500 focus:outline-none focus:bg-white"
+            className="bg-gray-100 shadow-lg rounded font-herfonty resize-none w-full h-20 p-3 placeholder-gray-500 focus:outline-none focus:bg-white"
             name="body"
             placeholder="Your reply"
             required
