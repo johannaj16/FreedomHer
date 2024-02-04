@@ -1,16 +1,23 @@
 import React from "react";
+import photo1 from "../assets/pfp_1.png";
+import photo2 from "../assets/pfp_2.png";
+import photo3 from "../assets/pfp_3.png";
+import photo4 from "../assets/pfp_4.png";
+
+const photos = [photo1, photo2, photo3, photo4];
 
 function ProfilePicSubPage({
   setProfileImage,
   handleSubmit,
   profileImageOptions,
-  handlePreviousStep, // Added for navigating back
+  handlePreviousStep,
 }) {
   return (
     <div className="bg-white w-4/5 max-w-[620px] p-10 rounded-xl">
       <h1 className="font-herfonty text-4xl text-pink-600 uppercase flex justify-center items-center gap-2">
         Select Your Profile Picture
       </h1>
+
       <form className="flex flex-col gap-10 pt-10 font-herfonty">
         {profileImageOptions.map((option, index) => (
           <div key={index} className="flex items-center gap-4">
@@ -22,7 +29,7 @@ function ProfilePicSubPage({
                 onChange={(e) => setProfileImage(e.target.value)}
               />
               <img
-                src={option}
+                src={photos[index]}
                 alt={`Profile Option ${index + 1}`}
                 className="w-12 h-12 rounded-full"
               />
