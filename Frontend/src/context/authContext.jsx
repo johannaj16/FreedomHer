@@ -55,11 +55,10 @@ export const AuthProvider = ({ children }) => {
       throw error; // Handle errors appropriately
     }
   };
+
   const isLogin = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/v1/users/islogin`, {
-        withCredentials: true, // Important for sending HTTP-only cookies
-      });
+      const response = await axios.get(`${BASE_URL}/api/v1/users/islogin`);
 
       if (response.status === 200 && response.data.isLoggedIn) {
         // Update state based on the response

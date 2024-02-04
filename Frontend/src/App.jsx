@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Home from "../src/pages/Home";
 import Forum from "../src/pages/Forums";
 import About from "../src/pages/About";
@@ -13,13 +13,9 @@ import SpecificPost from "./pages/SpecificPost";
 import { AuthProvider } from "./context/authContext";
 import { useAuth } from "./context/authContext.jsx";
 function App() {
-  const { isLogin } = useAuth();
-  useEffect(() => {
-    isLogin();
-  }, []); // Empty dependency array ensures this runs once at mount
-
   return (
     <AuthProvider>
+      <AuthInitializer />
       <BrowserRouter>
         <div className="sticky top-0 z-50">
           <Nav />
@@ -38,5 +34,13 @@ function App() {
     </AuthProvider>
   );
 }
+function AuthInitializer() {
+  const { isLogin } = useAuth();
 
+  useEffect(() => {
+    isLogin();
+  }, []);
+
+  return null; // Renders nothing, but `isLogin` will be called
+}
 export default App;
