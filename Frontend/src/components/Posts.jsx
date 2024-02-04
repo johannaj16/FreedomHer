@@ -112,7 +112,7 @@ posts.map((item) => {
             <p className="text-purple-900 capitalize text-xl pl-2">
               {item.genre}
             </p>
-            <p className="w-full line-clamp-2 pl-2 text-lg">{item.content}</p>
+            <p className="w-full line-clamp-2 pl-2 text-lg text-purple-900">{item.content}</p>
           </div>
         </Link>
       ))}
