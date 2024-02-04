@@ -20,27 +20,23 @@ jobs:
         with:
           node-version: "20" # Specify your Node.js version here
 
-      - name: Change to frontend
-        run: cd Frontend
+      - name: Build and Deploy
+        run: |
+          cd Frontend
+          npm install
+          npm run build
+          cd ..
+          ls
 
-      - name: list the file path
-        run: ls
-
-      - name: Install dependencies
-        run: npm install # Using npm instead of yarn
-
-      - name: Build
-        run: npm run build # Make sure your package.json has a "build" script
-
-      - name: Deploy to S3
-        uses: reggionick/s3-deploy@v4
+      - name: Deploying to S3
+        uses: reggionick/s3-deploy@v3
         with:
           folder: Frontend/dist # Update if your build directory is different
           bucket: ${{ secrets.S3_BUCKET }}
           bucket-region: ${{ secrets.S3_BUCKET_REGION }}
           dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: /
+          invalidation: /*
           delete-removed: true
           no-cache: true
           private: true
-          files-to-include: "{.*/**,**}"
+          filesToInclude: "{.*/**,**}"
