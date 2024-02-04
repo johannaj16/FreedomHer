@@ -30,7 +30,7 @@ function Nav() {
           <li>
             <Link
               to="/"
-              className="text-purple hover:underline text-2xl lg:text-2xl"
+              className="text-purple hover:text-pink-300 transition ease-in-out duration-300 text-2xl lg:text-2xl"
             >
               Home
             </Link>
@@ -38,7 +38,7 @@ function Nav() {
           <li>
             <Link
               to="/forum"
-              className="text-purple hover:underline text-2xl lg:text-2xl"
+              className="text-purple hover:text-pink-300 transition ease-in-out duration-300 text-2xl lg:text-2xl"
             >
               Forum
             </Link>
@@ -46,7 +46,7 @@ function Nav() {
           <li>
             <Link
               to="/about"
-              className="text-purple hover:underline text-2xl lg:text-2xl"
+              className="text-purple hover:text-pink-300 transition ease-in-out duration-300 text-2xl lg:text-2xl"
             >
               About
             </Link>
@@ -62,7 +62,7 @@ function Nav() {
             <li>
               <Link
                 to="/Login"
-                className="text-purple hover:underline text-2xl lg:text-2xl"
+                className="text-purple hover:text-pink-300 transition ease-in-out duration-300 text-2xl lg:text-2xl"
               >
                 Login
               </Link>
@@ -80,23 +80,23 @@ function Nav() {
       <div
         className={
           Navbar
-            ? "fixed left-0 top-0 w-[40%] min-h-screen pl-4 text-white  bg-[rgba(132,62,250)] pt-3  ease-in-out duration-300 z-50 md:hidden"
-            : "fixed left-[-100%] top-0 w-[40%] min-h-screen  text-white  bg-[rgba(132,62,250)]    ease-in-out duration-300 z-50 md:hidden"
+            ? "fixed left-0 top-0 w-[40%] min-h-screen pl-4 text-white  bg-purple-900 pt-3  ease-in-out duration-300 z-50 md:hidden"
+            : "fixed left-[-100%] top-0 w-[40%] min-h-screen  text-white  bg-purple-900    ease-in-out duration-300 z-50 md:hidden"
         }
       >
         <ul className="uppercase flex flex-col gap-5 font-herfont pt-8 text-2xl">
           <li>
-            <Link to="/" className="text-white hover:underline">
+            <Link to="/" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
               Home
             </Link>
           </li>
           <li>
-            <Link to="/forum" className="text-white hover:underline">
+            <Link to="/forum" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
               Forum
             </Link>
           </li>
           <li>
-            <Link to="/about" className="text-white hover:underline">
+            <Link to="/about" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
               About
             </Link>
           </li>
@@ -107,7 +107,7 @@ function Nav() {
             </li>
           ) : (
             <li>
-              <Link to="/Login" className="text-white hover:underline">
+              <Link to="/Login" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
                 Login
               </Link>
             </li>
