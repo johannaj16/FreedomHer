@@ -12,7 +12,9 @@ const morgan = require("morgan");
 
 // -------------------------- Mongodb connection
 const connectDB = require("./db/connect");
-
+// Error middleware import
+const notFound = require("./middleware/not-found");
+const errorHandler = require("./middleware/error-handler");
 //-------------------------Using imports
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
