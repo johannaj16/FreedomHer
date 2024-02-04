@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "../src/pages/Home";
 import Forum from "../src/pages/Forums";
 import About from "../src/pages/About";
@@ -11,7 +11,13 @@ import Register from "../src/pages/Register";
 import Nav from "../src/components/Nav";
 import SpecificPost from "./pages/SpecificPost";
 import { AuthProvider } from "./context/authContext";
+import { useAuth } from "./context/authContext.jsx";
 function App() {
+  const { isLogin } = useAuth();
+  useEffect(() => {
+    isLogin();
+  }, []); // Empty dependency array ensures this runs once at mount
+
   return (
     <AuthProvider>
       <BrowserRouter>
