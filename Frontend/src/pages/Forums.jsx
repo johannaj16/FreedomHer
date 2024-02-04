@@ -53,7 +53,7 @@ function Forums() {
   };
 
   return (
-    <main className="flex flex-col justify-center items-center">
+    <main className="flex flex-col font-herfonty justify-center items-center">
       <div className="w-full bg-[rgba(82,182,232,0.3)] py-5">
         <Search selectedTopic={(genre, title) => filterPosts(genre, title)} />
       </div>

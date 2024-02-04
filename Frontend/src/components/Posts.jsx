@@ -105,11 +105,11 @@ posts.map((item) => {
                 alt="Profile"
                 className="w-24 h-24 object-cover rounded-full bg-white"
               />
-              <h1 className="font-herfonty text-white text-2xl md:text-xl capitalize line-clamp-2">
+              <h1 className="font-herfonty text-purple-900 font-bold text-2xl md:text-xl capitalize line-clamp-2">
                 {item.title}
               </h1>
             </div>
-            <p className="text-pink-500 capitalize text-xl pl-2">
+            <p className="text-purple-900 capitalize text-xl pl-2">
               {item.genre}
             </p>
             <p className="w-full line-clamp-2 pl-2 text-lg">{item.content}</p>
