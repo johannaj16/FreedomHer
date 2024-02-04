@@ -8,7 +8,7 @@ function CommentCreator() {
           <textarea
             class="bg-gray-100 rounded border border-gray-400 font-herfonty leading-normal resize-none w-full h-20 py-3 px-3 placeholder-gray-700 focus:outline-none focus:bg-white"
             name="body"
-            placeholder="Type Your Comment"
+            placeholder="Type Your replySS"
             required
           ></textarea>
           <button className="bg-red-600 p-7">add butt</button>
