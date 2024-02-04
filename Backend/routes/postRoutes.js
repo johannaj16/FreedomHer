@@ -1,5 +1,5 @@
 const express = require("express");
-const authenticateUser
+const authenticateUser = require("../utils/authentication.js");
 const {
   getAllPosts,
   getPost,
