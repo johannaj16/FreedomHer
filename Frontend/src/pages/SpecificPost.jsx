@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Comments from "../components/Comments";
 import CommentCreator from "../components/CommentCreator";
-
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function SpecificPost() {
   const { id } = useParams();
   const [post, setPost] = useState([]);
@@ -16,7 +16,7 @@ function SpecificPost() {
     console.log("running the useEFect!");
     setLoading(true);
     axios
-      .get("http://localhost:4000/api/v1/posts/comment/" + id)
+      .get(`${BASE_URL}/api/v1/posts/comment/` + id)
       .then((response) => {
         console.log(response.data);
         setPost(response.data);
