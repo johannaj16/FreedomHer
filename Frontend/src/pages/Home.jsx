@@ -25,12 +25,6 @@ function Home() {
 
       </div>
 
-      <button
-        className="bg-[rgba(132,62,250,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] mt-5 my-8 text-purple text-3xl font-bold py-10 px-10 w-[17rem] rounded mx-auto"
-        onClick={() => setIsModalOpen(true)}
-      >
-        Add Post
-      </button>
 
       {/* {conditional render please <AddPost />} */}
       {isModalOpen && <AddPost isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeModal={() => setIsModalOpen(false)} />}
