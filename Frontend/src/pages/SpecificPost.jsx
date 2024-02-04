@@ -13,6 +13,7 @@ function SpecificPost() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("running the useEFect!")
     setLoading(true);
     axios
       .get("http://localhost:4000/api/v1/posts/comment/" + id)
