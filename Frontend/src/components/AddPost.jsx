@@ -35,7 +35,6 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
       setGenre("");
       setDescription("");
     } catch (error) {
-      console.error(" error:", error);
       setErrorMessage(" failed. Please try again."); // Display this error message to the user
     }
   };

@@ -39,11 +39,10 @@ function Register() {
   };
 
   const profileImageOptions = [
-    "url-to-profile-pic-1",
-    "url-to-profile-pic-2",
-    "url-to-profile-pic-3",
-    "url-to-profile-pic-4",
-    "url-to-profile-pic-5",
+    "../assets/pfp_1.png",
+    "../assets/pfp_2.png",
+    "../assets/pfp_3.png",
+    "../assets/pfp_4.png",
   ];
   return (
     <main className="flex justify-center items-center py-40">
