@@ -15,6 +15,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    .///
     if (username.length === 0) {
       return;
     }
