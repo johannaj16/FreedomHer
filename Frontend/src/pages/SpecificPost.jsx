@@ -52,7 +52,7 @@ function SpecificPost() {
         </div>
       ) : (
         <>
-          <div className="flex flex-col px-10 bg-[rgba(135,116,162,0.4)] mt-9 rounded-3xl mx-3 py-5 gap-5 font-herfonty">
+          <div className="flex flex-col px-10 bg-[rgba(135,116,162,0.4)] mt-9 rounded-3xl mx-8 py-5 gap-5 font-herfonty">
             <div className="flex justify-between items-center text-2xl text-gray-600 text-opacity-25">
               <div className="flex items-center">
                 <Link
@@ -67,7 +67,7 @@ function SpecificPost() {
             </div>
             <div className="text-3xl text-left">{post.title}</div>
             <div className=" border-b-2"></div>
-            <p className=" rounded-xl py-3">{post.content}</p>
+            <p className=" rounded-xl text-2xl py-3">{post.content}</p>
           </div>
           <CommentCreator />
           {/* <Comments comments={post.comments} /> */}
