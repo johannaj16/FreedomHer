@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { CgSppinnerTwo } from "react-icons/cg";
+import { useEffect } from "react";
 import axios from "axios";
 function SpecificPost() {
   const { id } = useParams();
