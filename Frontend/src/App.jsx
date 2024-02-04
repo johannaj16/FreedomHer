@@ -9,6 +9,7 @@ import NotFound from "../src/pages/NotFound";
 import Profile from "../src/pages/Profile";
 import Register from "../src/pages/Register";
 import Nav from "../src/components/Nav";
+import SpecificPost from "./pages/SpecificPost";
 import { AuthProvider } from "./context/authContext";
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/forum/:id" element={<SpecificPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
