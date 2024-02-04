@@ -42,19 +42,18 @@ const register = async (req, res) => {
 
     // Prepare user data for response, excluding the password
     const userForResponse = {
-      _id: theUser._id,
+      //_id: theUser._id, // No Idea
       username: theUser.username,
-      profileImage: theUser.profileImage
+      profileImage: theUser.profileImage,
       // Include any other fields you want to return
     };
 
     // Send response with both user data and token user
-    res.status(200).json({ user: userForResponse, tokenUser });
+    res.status(200).json(userForResponse);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 // const login = async (req, res) => {
 //   const { username, password } = req.body;
@@ -83,7 +82,9 @@ const login = async (req, res) => {
 
     // Check for missing username or password
     if (!username || !password) {
-      throw new CustomError.BadRequestError("Please provide username and password");
+      throw new CustomError.BadRequestError(
+        "Please provide username and password"
+      );
     }
 
     // Find user by username
@@ -104,20 +105,19 @@ const login = async (req, res) => {
 
     // Prepare user data for response, excluding sensitive information
     const userForResponse = {
-      _id: user._id,
+      //_id: user._id, //Commenting it out for now
       username: user.username,
-      profileImage: user.profileImage
+      profileImage: user.profileImage,
       // Include any other fields you want to return
     };
 
     // Respond with user and tokenUser data
-    res.status(StatusCodes.OK).json({ user: userForResponse, tokenUser });
+    res.status(StatusCodes.OK).json(userForResponse);
   } catch (error) {
     // Make sure to handle errors appropriately
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 };
-
 
 const logout = async (req, res) => {
   req.cookie("token", "logout", {
