@@ -7,8 +7,10 @@ const createJWT = ({ payload }) => {
   return token;
 };
 
-const isTokenValid = ({ token }) => jwt.verify(token, process.env.JWT_SECRET);
-
+const isTokenValid = ({ token }) => {
+  console.log("In token is valid" + token);
+  jwt.verify(token, process.env.JWT_SECRET);
+};
 const attachCookiesToResponse = ({ res, user }) => {
   const token = createJWT({ payload: user });
 
@@ -19,7 +21,7 @@ const attachCookiesToResponse = ({ res, user }) => {
     expires: new Date(Date.now() + oneDay),
     secure: true,
     signed: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    sameSite: "none",
   });
 };
 

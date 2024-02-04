@@ -1,13 +1,17 @@
 // dotenv config
 require("dotenv").config();
+require("express-async-errors");
 
 // --------------------------- importing packages
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const connectDB = require("./db/connect");
+
 const morgan = require("morgan");
+
+// -------------------------- Mongodb connection
+const connectDB = require("./db/connect");
 
 //-------------------------Using imports
 app.use(cookieParser(process.env.JWT_SECRET));
@@ -20,6 +24,10 @@ const Posts = require("./routes/postRoutes");
 app.use("/api/v1/posts", Posts);
 const User = require("./routes/authRoutes");
 app.use("/api/v1/users", User);
+
+// ----------------------- Error middleware
+app.use(notFound);
+app.use(errorHandler);
 
 // -------------------- Server startup
 const port = process.env.PORT || 4000;
