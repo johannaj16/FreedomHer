@@ -7,7 +7,14 @@ const createJWT = ({ payload }) => {
   return token;
 };
 
-const isTokenValid = ({ token }) => jwt.verify(token, process.env.JWT_SECRET);
+const isTokenValid = ({ token }) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    console.error("Token verification error:", error.message);
+    throw new Error("Invalid Token");
+  }
+};
 
 const attachCookiesToResponse = ({ res, user }) => {
   const token = createJWT({ payload: user });
@@ -15,11 +22,11 @@ const attachCookiesToResponse = ({ res, user }) => {
   const oneDay = 1000 * 60 * 60 * 24;
 
   res.cookie("token", token, {
-    httpOnly: true,
-    expires: new Date(Date.now() + oneDay),
-    secure: true,
-    signed: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    httpOnly: true, // To prevent XSS attacks
+    expires: new Date(Date.now() + oneDay), // Cookie expiration
+    secure: process.env.NODE_ENV === "production", // Set to true in production
+    signed: true, // If using signed cookies
+    sameSite: "None", // Adjust depending on cross-site access needs
   });
 };
 
