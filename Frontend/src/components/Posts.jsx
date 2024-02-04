@@ -14,7 +14,7 @@ function Posts({ posts }) {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-4">
               <img
-                src={fairy}
+                src={item.author.profileImage}
                 className=" w-24 h-24 object-cover rounded-full bg-white"
               />
 
