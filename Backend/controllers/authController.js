@@ -30,7 +30,7 @@ const {
 const register = async (req, res) => {
   try {
     const { profileImage, username, password } = req.body;
-
+    console.log(req.body);
     // Check if username already exists
     const alrExists = await userData.findOne({ username });
     if (alrExists) {

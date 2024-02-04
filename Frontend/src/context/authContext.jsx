@@ -28,11 +28,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Handle registration logic
-  const register = async (username, password) => {
+  const register = async (profileImage, username, password) => {
     try {
       const response = await axios.post(
         `${BASE_URL}/api/v1/users/register`,
-        { username, password },
+        { profileImage, username, password },
         { withCredentials: true } // Add withCredentials here
       );
       setCurrentUser(response.data);

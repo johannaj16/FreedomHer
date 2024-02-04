@@ -30,7 +30,7 @@ function Register() {
   const handleSubmit = async () => {
     if (registrationStep === 2) {
       try {
-        await register({ username, password, profileImage });
+        await register(username, password, profileImage);
         navigate("/");
       } catch (error) {
         console.error("Registration error:", error);
