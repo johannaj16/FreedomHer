@@ -69,7 +69,7 @@ function Nav() {
             </li>
           )}
         </ul>
-        <div onClick={handleNav} className="md:hidden">
+        <div onClick={handleNav} className="md:hidden cursor-pointer">
           {Navbar ? (
             <IoCloseSharp size={40} color="white" />
           ) : (

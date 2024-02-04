@@ -10,28 +10,27 @@ import Gabe from "../assets/gabeProfile.jpg";
 import MongoIcon from "../assets/mongoIcon.png";
 import Aarush from "../assets/aarushBestProfile.jpg";
 import SpringBootIcon from "../assets/springBootIcon.png";
+import "../index.css";
 function About() {
   return (
-    <main className="flex flex-col gap-20 justify-center items-center pt-10 px-14 text-[rgb(55,32,107)]">
+    <main className="flex flex-col gap-20 text-herfonty font-herfonty font-semibold justify-center items-center pt-10 px-4 text-[rgb(55,32,107)]">
       <div className="flex flex-col gap-5 items-center">
-        <h1 className="text-4xl text-center">Our Mission</h1>
-        <p className="text-center text-2xl md:w-3/5 ">
-          Our mission is to provide a secure and empowering online forum,
-          dedicated to fostering open conversations among women. Our platform
-          serves as a safe space for discussions on vital topics. We are
+        <h1 className="md-text-[120px] text-[80px] text-center my-5">Our Mission</h1>
+        <p className="text-center text-2xl text-herfonty md:w-5/6 w-4/5">
+          Our mission is to empower women one conversation at a time by providing a secure but completely anonymouse online forum,
+          dedicated to fostering open conversations amongst those that have been victims of domestic violence. 
+          <br/><br/> We are
           committed to creating a supportive community where women can connect,
-          share experiences, and find valuable resources to navigate various
-          aspects of their lives. Through inclusivity, compassion, and a
-          commitment to anonymity, we strive to empower women in their journey
-          towards personal growth, resilience, and collective strength
+          share experiences, and find valuable resources to navigate through these difficulties. 
+          
         </p>
       </div>
       <div className="flex flex-col gap-5 items-center">
-        <h1 className="text-center text-4xl ">Our Developers!</h1>
-        <p className="text-center text-2xl md:w-3/5 ">
+        <h1 className="text-center md-text-[100px] text-[50px]">Our Developers!</h1>
+        <p className="text-center text-2xl md:w-5/6 w-4/5 ">
           Meet our dedicated team of developers, passionate about creating an
           inclusive and secure online space for women to connect, share, and
-          support each other on their unique journeys.
+          support each other on their journeys.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 md:w-3/5 place-items-center w-full gap-5 pb-10">
