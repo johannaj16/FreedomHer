@@ -28,7 +28,7 @@ function Nav() {
         <ul className="hidden md:flex items-center md:gap-10 lg:gap-14">
           <li>
             <Link
-              to="/home"
+              to="/"
               className="text-purple hover:underline text-2xl lg:text-2xl"
             >
               Home
