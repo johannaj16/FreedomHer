@@ -17,9 +17,9 @@ function Forums() {
     axios
       .get(`http://localhost:4000/api/v1/posts/`)
       .then((response) => {
-        console.log(response.data);
-        setPosts(response.data);
-        setOrgPost(response.data);
+        console.log(response.data.posts);
+        setPosts(response.data.posts);
+        setOrgPost(response.data.posts);
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((error) => {

@@ -9,7 +9,7 @@ import NotFound from "../src/pages/NotFound";
 import Profile from "../src/pages/Profile";
 import Register from "../src/pages/Register";
 import Nav from "../src/components/Nav";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider } from "./context/authContext";
 function App() {
   return (
     <AuthProvider>
