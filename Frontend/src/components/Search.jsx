@@ -67,6 +67,7 @@ function Search({ selectedTopic }) {
       <select className="rounded-xl py-2 px-2 bg-[rgba(82,182,232,0.3)] w-4/5 md:w-2/6 text-white text-xl md:text-2xl md:py-3">
         {genre.map((item, index) => (
           <option
+            key={item.id}
             onClick={() => {
               setActiveIndex(index);
               setGenre(item.name);
