@@ -54,6 +54,32 @@ export const AuthProvider = ({ children }) => {
       console.error("Logout error:", error.response?.data || error.message);
       throw error; // Handle errors appropriately
     }
+
+    const isLogin = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/api/v1/users/check_loggedin`,
+          {
+            withCredentials: true, // Important for sending HTTP-only cookies
+          }
+        );
+
+        if (response.status === 200 && response.data.isLoggedIn) {
+          // Update state based on the response
+          // Assuming response.data.user contains user data
+          setCurrentUser(response.data.user);
+        } else {
+          setCurrentUser(null);
+        }
+      } catch (error) {
+        console.error(
+          "Check login error:",
+          error.response?.data || error.message
+        );
+        setCurrentUser(null); // Optionally reset user on error
+        // Optionally, handle errors more specifically based on the error response
+      }
+    };
   };
 
   const value = {

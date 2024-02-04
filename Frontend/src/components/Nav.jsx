@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa"; // Importing the profile icon
 import freedomfairy from "../assets/butterfly.png";
+import { useAuth } from "../context/authContext.jsx";
 
 function Nav() {
   const [Navbar, setNav] = useState(false);
-
+  const { currentUser } = useAuth();
   const handleNav = () => {
     setNav(!Navbar);
   };
@@ -50,14 +51,23 @@ function Nav() {
               About
             </Link>
           </li>
-          <li>
-            <Link
-              to="/Login"
-              className="text-purple hover:underline text-2xl lg:text-2xl"
-            >
-              Login
-            </Link>
-          </li>
+          {currentUser ? (
+            <li className="flex items-center">
+              <FaUserCircle size={30} className="text-white mr-2" />
+              <span className="text-purple text-2xl lg:text-2xl">
+                {currentUser.username}
+              </span>
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/Login"
+                className="text-purple hover:underline text-2xl lg:text-2xl"
+              >
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
         <div onClick={handleNav} className="md:hidden">
           {Navbar ? (
@@ -90,11 +100,18 @@ function Nav() {
               About
             </Link>
           </li>
-          <li>
-            <Link to="/Login" className="text-white hover:underline">
-              Login
-            </Link>
-          </li>
+          {currentUser ? (
+            <li className="flex items-center">
+              <FaUserCircle size={30} className="mr-2" />
+              <span>{currentUser.username}</span>
+            </li>
+          ) : (
+            <li>
+              <Link to="/Login" className="text-white hover:underline">
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
