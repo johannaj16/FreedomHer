@@ -15,6 +15,7 @@
 //       const dataToAdd = {
 //         reply: "another reply!"
 //       };
+//       };
 
 //       //console.log(`http://localhost:4000/api/v1/posts/comment/${id}`);
 //       const response = await axios.patch(`http://localhost:4000/api/v1/posts/comment/${id}`, dataToAdd);
@@ -54,41 +55,43 @@
 
 // export default CommentCreator;
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios"; // Ensure axios is imported
+import axios from "axios";
+import LoginOrRegisterModal from "../components/LoginOrRegisterModal"; // Import your login/register modal component
+import { useAuth } from "../context/authContext.jsx"; // Adjust the import path as necessary
 
 function CommentCreator() {
   const { id } = useParams();
-  const [reply, setReply] = useState(""); // State to hold the textarea value
+  const { currentUser } = useAuth(); // Use your authentication context
+  const [reply, setReply] = useState("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleChange = (e) => {
-    setReply(e.target.value); // Update the reply state whenever the textarea changes
+    setReply(e.target.value);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submit action
-    console.log("yuh");
-    console.log(id);
+    e.preventDefault();
+
+    if (!currentUser) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+
     try {
       const dataToAdd = {
-        reply: reply, // Use the reply state value as the reply
+        reply: reply,
       };
-
       const response = await axios.patch(
         `http://localhost:4000/api/v1/posts/comment/${id}`,
         dataToAdd
       );
       console.log(response.data);
-      // setPost(response.data); // Assuming setPost updates the state
-      setTimeout(() => setLoading(false), 1000); // Assuming setLoading updates the state
-      setReply(""); // Optionally reset the textarea after submission
+      setReply(""); // Reset the reply after successful submission
     } catch (error) {
       console.error(error);
-      // setLoading(false); // Assuming setLoading updates the state
     }
-
-    console.log("Form submitted");
   };
 
   return (
@@ -114,6 +117,13 @@ function CommentCreator() {
           </button>
         </form>
       </div>
+      {isLoginModalOpen && (
+        <LoginOrRegisterModal
+          isModalOpen={isLoginModalOpen}
+          setIsModalOpen={setIsLoginModalOpen}
+          closeModal={() => setIsLoginModalOpen(false)}
+        />
+      )}
     </>
   );
 }

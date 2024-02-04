@@ -76,15 +76,15 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
               <option value="" disabled selected>
                 Select genre
               </option>
-              <option value="option1">Share your Story</option>
-              <option value="option2">Safety and Emergency Planning</option>
-              <option value="option3">Recovery and Healing</option>
-              <option value="option1">Education and Awareness</option>
-              <option value="option2">
+              <option value="Share your Story">Share your Story</option>
+              <option value="Safety and Emergency Planning">Safety and Emergency Planning</option>
+              <option value="Recovery and Healing">Recovery and Healing</option>
+              <option value="Education and Awareness">Education and Awareness</option>
+              <option value="Financial Planning and Independence">
                 Financial Planning and Independence
               </option>
-              <option value="option3">Legal Support</option>
-              <option value="option3">Anonymous Peer Support Groups</option>
+              <option value="Legal Support">Legal Support</option>
+              <option value="Anonymous Peer Support Groups">Anonymous Peer Support Groups</option>
 
               {/* Add more options as needed */}
             </select>
