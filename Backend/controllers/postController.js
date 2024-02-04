@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { StatusCodes } = require("http-status-codes");
 const Post = require("../models/postData");
+const User = require("../models/users");
 const CustomError = require("../errors");
 
 //get all the posts
@@ -65,8 +66,14 @@ const makePost = async (req, res) => {
     const { title, content, genre, comments } = req.body; //req.body is params coming in from front end
     const {userId} = req.user;
     vote = 0;
+
+    const user = User.findById(userId);
+
+    const { profileImage } = user;
+
     try {
       const post = await Post.create({
+        profileImage,
         author: userId,
         title,
         content,
@@ -177,6 +184,26 @@ const deletePost = async (req, res) => {
     .json({ msg: `Successful Post deletion of id: ${post_id}` });
 };
 
+
+const getPfp = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const theUser = await User.findById(id); // Use await to ensure the promise resolves
+    console.log(theUser);
+    // Assuming you only want to send back the profile picture URL,
+    // and assuming the profile picture URL is stored in a field named `profileImage` of the user document.
+    // Adjust the field name accordingly if it's stored differently.
+    if (theUser) {
+      res.status(200).json({ profileImage: theUser.profileImage });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
 //Liking Controller
 const likePost = async (req, res) => {
   const { userId } = req.user;
@@ -235,4 +262,5 @@ module.exports = {
   addUpVote,
   updatePost,
   getAllPostsForUser,
+  getPfp,
 };
