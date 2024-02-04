@@ -9,7 +9,7 @@ function Home() {
     <div>
       {/* Other content... */}
 
-      <div className="text-[rgb(55,32,107)] flex flex-col items-center font-sans font-bold h-screen mx-8">
+      <div className="text-[rgb(55,32,107)] flex flex-col items-center font-sans font-bold mt-[4rem] h-screen mx-8">
         <div className=" flex justify-center gap-4 items-center text-purple w-full text-[3.3rem] lg:text-[5.3rem] mt-[2rem] font-herfonty text-center py-20">
           FreedomHER
           <div className="icon">
@@ -32,11 +32,11 @@ function Home() {
           </div>
         </div>
         <div className="w-full text-[2.3rem] font-herfonty text-center -mt-[3rem]  drop-shadow-[rgba(0,0,0,.55)]">
-          an anonymous forum to support domestic violence victims.
+          an anonymous forum to support victims of domestic violence.
         </div>
         <Link
           to="/forum"
-          className="bg-[rgba(132,62,250,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] my-8 text-purple text-3xl font-bold py-10 px-10 w-[17rem] rounded mx-auto"
+          className="bg-[rgba(132,62,250,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] mt-[7rem] text-purple text-3xl font-bold py-10 px-10 w-[17rem] rounded mx-auto"
         >
           Go to forum
         </Link>
