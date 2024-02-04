@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function AddPost({ isModalOpen, setIsModalOpen }) {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
@@ -25,7 +26,7 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
         return;
       }
       setIsModalOpen(false);
-      await axios.post("http://localhost:4000/api/v1/posts/", {
+      await axios.post(`${BASE_URL}/api/v1/posts/`, {
         title,
         genre,
         content: description,
@@ -76,14 +77,20 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
                 Select genre
               </option>
               <option value="Share your Story">Share your Story</option>
-              <option value="Safety and Emergency Planning">Safety and Emergency Planning</option>
+              <option value="Safety and Emergency Planning">
+                Safety and Emergency Planning
+              </option>
               <option value="Recovery and Healing">Recovery and Healing</option>
-              <option value="Education and Awareness">Education and Awareness</option>
+              <option value="Education and Awareness">
+                Education and Awareness
+              </option>
               <option value="Financial Planning and Independence">
                 Financial Planning and Independence
               </option>
               <option value="Legal Support">Legal Support</option>
-              <option value="Anonymous Peer Support Groups">Anonymous Peer Support Groups</option>
+              <option value="Anonymous Peer Support Groups">
+                Anonymous Peer Support Groups
+              </option>
 
               {/* Add more options as needed */}
             </select>
