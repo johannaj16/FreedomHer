@@ -4,14 +4,15 @@ const {
   getPost,
   makePost,
   addUpVote,
-  updatePost
+  updatePost,
 } = require("../controllers/postController");
 const router = express.Router();
 
 router.route("/").get(getAllPosts);
 router.route("/:id").get(getPost);
-router.route("").post(makePost);
-router.route("/upvote").patch(addUpVote);
+router.route("/").post(makePost);
+router.route("/upvote:id").patch(addUpVote);
+router.route("/:id").patch(updatePost);
 // router.route("/updatePost").patch(updatePost);
 
 module.exports = router;
