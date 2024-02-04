@@ -13,6 +13,10 @@ function Nav() {
     setNav(!Navbar);
   };
 
+  const handleSignOut = () => {
+    // adam code
+  };
+
   return (
     <nav className="bg-[rgba(132,62,250,0.2)] p-5 px-8 font-herfonty shadow-lg backdrop-blur-lg text-[rgb(55,32,107)]">
       <div className="flex items-center justify-between">
@@ -52,11 +56,19 @@ function Nav() {
             </Link>
           </li>
           {currentUser ? (
-            <li className="flex items-center">
-              <FaUserCircle size={30} className="text-white mr-2" />
-              <span className="text-purple text-2xl lg:text-2xl">
-                {currentUser.username}
-              </span>
+            <li className="flex flex-col items-center gap-1 p-2  rounded-lg bg-[rgba(132,62,250,0.9)]">
+              <div className="flex items-center">
+                <FaUserCircle size={30} className="text-white mr-2" />
+                <span className="text-purple text-white text-2xl lg:text-2xl">
+                  {currentUser.username}
+                </span>
+              </div>
+              <button
+                onClick={handleSignOut}
+                className=" bg-[rgba(232,220,253,0.3)] hover:bg-gray-900 hover:text-purple-500 ease-in-out duration-150  rounded-xl w-fit p-1 px-2"
+              >
+                Sign Out
+              </button>
             </li>
           ) : (
             <li>
