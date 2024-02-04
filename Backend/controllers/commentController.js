@@ -52,36 +52,70 @@ const addComment = async (req, res) => {
   }
 };
 
-const updatePost = async (req, res) => {
-  const { userId } = req.user;
-  const { id: post_id } = req.params;
-  const { title, description } = req.body;
-  const post = await Post.findOne({ _id: post_id });
+const getAllCommentsForUser = async (req, res) => {
+    //get all the comments, and then only get the ones that are by author
+    const { id } = req.params;
+    try{
+        // const coms = await commentData.find({});
+        const userComments = await commentData.find({ author: id }).limit(50);
+        console.log(userComments);
+        res.status(200).json(userComments)
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
 
-  if (!post) {
-    throw new CustomError.NotFoundError(
-      `Post wasnt found with id : ${post_id} `
-    );
-  }
-
-  if (String(userId) !== String(post.userId)) {
-    throw new CustomError.UnauthorizedError(
-      `Ownership of post belongs to someone else`
-    );
-  }
-
-  post.title = title;
-  post.description = description;
-  await post.save();
-
-  const postObject = post.toObject();
-  const { likes } = postObject;
-  delete postObject.updatedAt;
-
-  res.status(StatusCodes.OK).json({ ...postObject, likes: likes.length });
-};
+const getCommentsForPost = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const post = await Post.findById(id)
+          .populate('comments') // Populate the comments field
+          .exec();
+        console.log(post);
+        if (!post) {
+          return res.status(404).json({ message: 'Post not found' });
+        }
+        res.status(200).json(post);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+}
 
 module.exports = {
-  makeComment,
-  addComment,
+    makeComment,
+    addComment,
+    getAllCommentsForUser,
+    getCommentsForPost,
 };
+  
+
+// const updatePost = async (req, res) => {
+//   const { userId } = req.user;
+//   const { id: post_id } = req.params;
+//   const { title, description } = req.body;
+//   const post = await Post.findOne({ _id: post_id });
+
+//   if (!post) {
+//     throw new CustomError.NotFoundError(
+//       `Post wasnt found with id : ${post_id} `
+//     );
+//   }
+
+//   if (String(userId) !== String(post.userId)) {
+//     throw new CustomError.UnauthorizedError(
+//       `Ownership of post belongs to someone else`
+//     );
+//   }
+
+//   post.title = title;
+//   post.description = description;
+//   await post.save();
+
+//   const postObject = post.toObject();
+//   const { likes } = postObject;
+//   delete postObject.updatedAt;
+
+//   res.status(StatusCodes.OK).json({ ...postObject, likes: likes.length });
+// };
+
