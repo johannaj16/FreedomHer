@@ -12,7 +12,7 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
         setErrorMessage(""); // Reset error message on new submission
 
         try {
-            
+            setIsModalOpen(false)
         } catch (error) {
             console.error(" error:", error);
             setErrorMessage(" failed. Please try again."); // Display this error message to the user
