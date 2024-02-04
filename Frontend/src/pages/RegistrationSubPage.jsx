@@ -13,8 +13,8 @@ function RegisterSubPage({
 }) {
   return (
     <div className="bg-white w-4/5 max-w-[620px] p-10 rounded-xl">
-      <h1 className="font-herfonty text-4xl text-pink-600 uppercase flex justify-center items-center gap-2">
-        Register <CgProfile size={45} />
+      <h1 className="font-herfonty text-4xl text-[rgb(214,132,187)] flex justify-center items-center gap-2">
+      <CgProfile size={35} /> register here 
       </h1>
       <form className="flex flex-col gap-10 pt-10 font-herfonty">
         <input
@@ -50,7 +50,7 @@ function RegisterSubPage({
         <button
           type="button" // Changed type to "button"
           onClick={handleNextStep} // Added click handler
-          className="bg-pink-600 rounded-lg p-3 text-xl font-bold text-white hover:bg-pink-700"
+          className="bg-[rgb(214,132,187)] rounded-lg p-3 text-xl font-bold text-white hover:bg-pink-700"
         >
           Next
         </button>
