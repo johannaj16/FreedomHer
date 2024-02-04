@@ -5,7 +5,7 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
   return (
     <div className={`modal ${isModalOpen ? "visible" : "hidden"}`}>
         
-      <div className="absolute flex flex-col fixed w-4/5 md:w-3/5 mx-auto mb-6 inset-6 justify-center items-center rounded-3xl bg-[rgba(132,62,250,0.2)] backdrop-blur-lg opacity-98 font-herfonty z-50">
+      <div className="absolute flex flex-col fixed w-4/5 md:w-3/5 mx-auto pb-8 inset-6 justify-center items-center rounded-3xl bg-[rgba(132,62,250,0.2)] backdrop-blur-lg opacity-98 font-herfonty z-50">
         <button className="text-3xl absolute top-0 right-0 m-4" onClick={() => setIsModalOpen(false)}><IoMdClose/></button>
 
         <div>
