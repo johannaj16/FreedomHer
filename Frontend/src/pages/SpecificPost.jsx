@@ -70,7 +70,7 @@ function SpecificPost() {
             <p className=" rounded-xl text-2xl py-3">{post.content}</p>
           </div>
           <CommentCreator />
-          {/* <Comments comments={post.comments} /> */}
+          {post.comments && <Comments comments={post.comments} />}
         </>
       )}
     </>
