@@ -52,6 +52,9 @@ function Register() {
       case 1:
         return (
           <RegisterSubPage
+            isNotConfirmed={isNotConfirmed}
+            username={username}
+            password={password}
             setUsername={setUsername}
             setPassword={setPassword}
             setConfirmPassword={setConfirmPassword}
@@ -60,7 +63,7 @@ function Register() {
         );
       case 2:
         return (
-          <ChooseProfileSubPage
+          <ProfilePicPage
             setProfileImage={setProfileImage}
             handleSubmit={handleSubmit}
           />

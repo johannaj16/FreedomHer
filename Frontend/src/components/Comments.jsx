@@ -23,12 +23,13 @@ function Comments({ comments }) {
         Replies <BsReply size={35} />
       </h1>
       {reversedComments.map((item, index) => (
-        <div className="flex justify-between p-5 bg-[rgba(135,116,162,0.4)] shadow-lg rounded-lg">
-          <h1 key={item._id || index} className="text-lg">
-            {item.reply}
-          </h1>
+        <div
+          key={item._id || index}
+          className="flex justify-between p-5 bg-[rgba(135,116,162,0.4)] shadow-lg rounded-lg"
+        >
+          <h1 className="text-lg">{item.reply}</h1>
           <p>{formatDate(item.createdAt)}</p>
-        </div> // Using item._id as key, fallback to index
+        </div>
       ))}
     </div>
   );
