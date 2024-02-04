@@ -2,12 +2,16 @@ import { useState } from "react";
 import { CgProfile } from "react-icons/cg"; // Import the icon to match the Login page
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/authContext";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+// Register
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isNotConfirmed, setIsNotConfirmed] = useState(false);
+  const { register } = useAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,14 +30,10 @@ function Register() {
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/v1/users/register`, {
-        username,
-        password,
-      });
-      if (response.status !== 200) {
-        console.error(`Received status code ${response.status}`);
-        return;
-      }
+      //register
+      await register(username, password);
+
+      //GO home baby
       navigate("/");
     } catch (error) {
       console.error("Registration error:", error);

@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
+import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Create a context
 const AuthContext = createContext();
@@ -12,22 +14,51 @@ export const AuthProvider = ({ children }) => {
 
   // Function to handle login
   const login = async (username, password) => {
-    // Perform login operation and set the user
-    // For example, using Axios:
-    // const response = await axios.post('/api/login', { username, password });
-    // setCurrentUser(response.data.user);
+    try {
+      const response = await axios.post(`${BASE_URL}/api/v1/users/login`, {
+        username,
+        password,
+      });
+      setCurrentUser(response.data.user); // Assuming the user data is in response.data.user
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  };
+
+  //Handle registration logic
+  const register = async (username, password) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/api/v1/users/register`, {
+        username,
+        password,
+      });
+      setCurrentUser(response.data.user); // Set user data on successful registration
+    } catch (error) {
+      console.error(
+        "Registration error:",
+        error.response?.data || error.message
+      );
+      throw error; // Rethrow the error to handle it in the component
+    }
   };
 
   // Function to handle logout
-  const logout = () => {
-    setCurrentUser(null);
-    // Perform additional logout operations if necessary
+  const logout = async () => {
+    try {
+      await axios.get(`${BASE_URL}/api/v1/users/logout`);
+      setCurrentUser(null);
+    } catch (error) {
+      console.error("Logout error:", error.response?.data || error.message);
+      throw error; // Handle errors appropriately
+    }
   };
 
   const value = {
     currentUser,
     login,
     logout,
+    register,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

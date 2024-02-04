@@ -3,13 +3,15 @@ import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useAuth } from "../context/authContext";
 
+//Handling login function
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Added for displaying error messages
   const navigate = useNavigate();
-
+  const { login } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(""); // Reset error message on new submission
@@ -20,15 +22,11 @@ function Login() {
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/api/v1/users/login`, {
-        username,
-        password,
-      });
-      if (response.status === 200) {
-        navigate("/"); // Navigate to home page or dashboard on successful login
-      } else {
-        setErrorMessage(`Login failed with status code: ${response.status}`);
-      }
+      //Login to the auth
+      await login(username, password);
+
+      // Navigate to home page or dashboard on successful login
+      navigate("/");
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage("Login failed. Please try again."); // Display this error message to the user
