@@ -1,4 +1,5 @@
 const express = require("express");
+const authenticateUser = require("../utils/authentication.js");
 const {
   getAllPosts,
   getPost,
@@ -10,9 +11,9 @@ const router = express.Router();
 
 router.route("/").get(getAllPosts);
 router.route("/:id").get(getPost);
-router.route("/").post(makePost);
-router.route("/upvote:id").patch(addUpVote);
-router.route("/:id").patch(updatePost);
+router.route("/").post(authenticateUser, makePost);
+router.route("/upvote:id").patch(authenticateUser, addUpVote);
+router.route("/:id").patch(authenticateUser, updatePost);
 // router.route("/updatePost").patch(updatePost);
 
 module.exports = router;
