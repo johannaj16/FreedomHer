@@ -28,7 +28,12 @@ const postSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: "FreedomHerUser",
-    }
+    },
+    profileImage: {
+        type: String,
+        default: "https://cdn-icons-png.flaticon.com/512/3069/3069172.png",
+    },
+
 }, {timestamps: true});
 
 const postData = mongoose.model('FreedomHerPost', postSchema);
