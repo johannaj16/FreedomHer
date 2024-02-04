@@ -1,52 +1,32 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { BsSearchHeart } from "react-icons/bs";
 import AddPost from "../components/AddPost";
+import LoginOrRegisterModal from "../components/LoginOrRegisterModal"; // Import your login/register modal component
+import genre from "./genreTypes.js";
+import { useAuth } from "../context/authContext.jsx"; // Adjust the import path as necessary
+
 function Search({ selectedTopic }) {
-  const genre = [
-    {
-      id: 1,
-      name: "All",
-    },
-    {
-      id: 2,
-      name: "Share Your Story",
-    },
-    {
-      id: 3,
-      name: "Safety and Emergency Planning",
-    },
-    {
-      id: 4,
-      name: "Recovery and Healing",
-    },
-    {
-      id: 5,
-      name: "Education and Awareness",
-    },
-    {
-      id: 6,
-      name: "Financial PLanning and Independence",
-    },
-    {
-      id: 7,
-      name: "Legal Support",
-    },
-    {
-      id: 8,
-      name: "Anonymous Peer Support Groups",
-    },
-  ];
+  const { currentUser } = useAuth();
 
   const [searchInput, setSearchInput] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchSubmission, setSubmission] = useState("");
   const [currentGenre, setGenre] = useState("All");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddPostModalOpen, setIsAddPostModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmission(searchInput);
     selectedTopic(currentGenre, searchInput);
+  };
+
+  const handleAddPostClick = () => {
+    if (currentUser) {
+      setIsAddPostModalOpen(true);
+    } else {
+      setIsLoginModalOpen(true);
+    }
   };
 
   return (
@@ -84,15 +64,24 @@ function Search({ selectedTopic }) {
       <div className=" border-b-2 w-4/5  md:border-l-2 md:h-20 md:w-1"></div>
       <button
         className="bg-[rgba(132,62,250,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] text-purple text-3xl font-bold py-3 px-5 w-4/5 md:w-2/6 rounded mx-auto"
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleAddPostClick}
       >
         Add Post
       </button>
-      {isModalOpen && (
+
+      {isAddPostModalOpen && (
         <AddPost
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          closeModal={() => setIsModalOpen(false)}
+          isModalOpen={isAddPostModalOpen}
+          setIsModalOpen={setIsAddPostModalOpen}
+          closeModal={() => setIsAddPostModalOpen(false)}
+        />
+      )}
+
+      {isLoginModalOpen && (
+        <LoginOrRegisterModal
+          isModalOpen={isLoginModalOpen}
+          setIsModalOpen={setIsLoginModalOpen}
+          closeModal={() => setIsLoginModalOpen(false)}
         />
       )}
     </div>

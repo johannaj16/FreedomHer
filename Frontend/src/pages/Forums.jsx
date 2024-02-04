@@ -16,7 +16,7 @@ function Forums() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:4000/api/v1/posts/`)
+      .get(`${BASE_URL}/api/v1/posts/`)
       .then((response) => {
         console.log(response.data.posts);
         setPosts(response.data.posts);

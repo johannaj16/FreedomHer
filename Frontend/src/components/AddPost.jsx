@@ -30,7 +30,7 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
         genre,
         content: description,
       });
-      
+
       setTitle("");
       setGenre("");
       setDescription("");
