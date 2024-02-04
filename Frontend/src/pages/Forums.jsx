@@ -12,6 +12,7 @@ function Forums() {
   const [orgPost, setOrgPost] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // const [orgComment, setOrgComment] = useState([]);
   useEffect(() => {
     setLoading(true);
     axios
