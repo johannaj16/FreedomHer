@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const userData = require("../models/users");
 const CustomError = require("../errors");
 const { StatusCodes } = require("http-status-codes");
-const { attachCookiesToResponse, createTokenUser } = require("../utils");
+const {
+  attachCookiesToResponse,
+  createTokenUser,
+  isTokenValid,
+} = require("../utils");
 
 // const register = async (req, res) => {
 //   try {
@@ -123,19 +127,19 @@ const islogin = async (req, res) => {
     console.log(req.cookies);
     console.log(req.signedCookies);
     // Check if signed cookies exist and contain a specific cookie (e.g., 'userId')
-    if (!req.signedCookies || !req.signedCookies.token) {
+    if (!req.signedCookies) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ msg: "Not logged in" });
     }
     console.log(req.signedCookies);
-
+    const token = req.signedCookies.token;
     // Extract user ID from signed cookie
-    const { userId } = req.signedCookies.token;
+    const { userId } = isTokenValid({ token });
 
     // Find user by ID
     const user = await userData.findById(userId);
-    console.log(user);
+
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: "User not found" });
     }

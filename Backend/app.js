@@ -18,9 +18,14 @@ const errorHandler = require("./middleware/error-handler");
 //-------------------------Using imports
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(morgan("tiny"));
-app.use(cors());
-app.use(express.json()); //makes json readily available as javascript object in req.body
 
+app.use(express.json()); //makes json readily available as javascript object in req.body
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true, // This is important for cookies
+  })
+);
 // ---------------------- Routes
 const Posts = require("./routes/postRoutes");
 app.use("/api/v1/posts", Posts);

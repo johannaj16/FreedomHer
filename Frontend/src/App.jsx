@@ -12,7 +12,10 @@ import Nav from "../src/components/Nav";
 import SpecificPost from "./pages/SpecificPost";
 import { AuthProvider } from "./context/authContext";
 import { useAuth } from "./context/authContext.jsx";
+import axios from "axios";
 function App() {
+  axios.defaults.withCredentials = true;
+
   return (
     <AuthProvider>
       <AuthInitializer />

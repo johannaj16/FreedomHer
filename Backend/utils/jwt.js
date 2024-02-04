@@ -23,11 +23,11 @@ const attachCookiesToResponse = ({ res, user }) => {
   const oneDay = 1000 * 60 * 60 * 24;
 
   res.cookie("token", token, {
-    httpOnly: true, // To prevent XSS attacks
+    httpOnly: false, // To prevent XSS attacks
     expires: new Date(Date.now() + oneDay), // Cookie expiration
     secure: false, // Set to true in production
     signed: true, // If using signed cookies
-    sameSite: "None", // Adjust depending on cross-site access needs
+    sameSite: "Strict", // Adjust depending on cross-site access needs
   });
 };
 
