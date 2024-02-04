@@ -16,7 +16,7 @@ function SpecificPost() {
     setLoading(true);
     console.log("yo");
     axios
-      .get("http://localhost:4000/api/v1/posts/" + id)
+      .get("http://localhost:4000/api/v1/posts/comment/" + id)
       .then((response) => {
         console.log(response.data);
         setPost(response.data);
@@ -70,7 +70,8 @@ function SpecificPost() {
             <p className=" rounded-xl text-2xl py-3">{post.content}</p>
           </div>
           <CommentCreator />
-          {/* <Comments comments={post.comments} /> */}
+          {console.log(post.comments + "This should be here")}
+          <Comments comments={post.comments} />
         </>
       )}
     </>
