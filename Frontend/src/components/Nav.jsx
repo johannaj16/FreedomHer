@@ -8,13 +8,13 @@ import { useAuth } from "../context/authContext.jsx";
 
 function Nav() {
   const [Navbar, setNav] = useState(false);
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const handleNav = () => {
     setNav(!Navbar);
   };
 
-  const handleSignOut = () => {
-    // adam code
+  const HandleSignOut = () => {
+    logout();
   };
 
   return (
@@ -64,7 +64,7 @@ function Nav() {
                 </span>
               </div>
               <button
-                onClick={handleSignOut}
+                onClick={HandleSignOut}
                 className=" bg-[rgba(232,220,253,0.3)] hover:bg-gray-900 hover:text-purple-500 ease-in-out duration-150  rounded-xl w-fit p-1 px-2"
               >
                 Sign Out
@@ -98,17 +98,26 @@ function Nav() {
       >
         <ul className="uppercase flex flex-col gap-5 font-herfont pt-8 text-2xl">
           <li>
-            <Link to="/" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
+            <Link
+              to="/"
+              className="text-white hover:text-pink-300 transition ease-in-out duration-300"
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link to="/forum" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
+            <Link
+              to="/forum"
+              className="text-white hover:text-pink-300 transition ease-in-out duration-300"
+            >
               Forum
             </Link>
           </li>
           <li>
-            <Link to="/about" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
+            <Link
+              to="/about"
+              className="text-white hover:text-pink-300 transition ease-in-out duration-300"
+            >
               About
             </Link>
           </li>
@@ -119,7 +128,10 @@ function Nav() {
             </li>
           ) : (
             <li>
-              <Link to="/Login" className="text-white hover:text-pink-300 transition ease-in-out duration-300">
+              <Link
+                to="/Login"
+                className="text-white hover:text-pink-300 transition ease-in-out duration-300"
+              >
                 Login
               </Link>
             </li>
