@@ -12,7 +12,7 @@ import Aarush from "../assets/aarushBestProfile.jpg";
 import SpringBootIcon from "../assets/springBootIcon.png";
 function About() {
   return (
-    <main className="flex flex-col gap-20 justify-center items-center pt-10 px-14">
+    <main className="flex flex-col gap-20 justify-center items-center pt-10 px-14 text-[rgb(55,32,107)]">
       <div className="flex flex-col gap-5 items-center">
         <h1 className="text-4xl text-center">Our Mission</h1>
         <p className="text-center text-2xl md:w-3/5 ">

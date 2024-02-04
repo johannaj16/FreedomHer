@@ -14,7 +14,7 @@
 //     try {
 //       const dataToAdd = {
 //         reply: "another reply!"
-//       };  
+//       };
 
 //       //console.log(`http://localhost:4000/api/v1/posts/comment/${id}`);
 //       const response = await axios.patch(`http://localhost:4000/api/v1/posts/comment/${id}`, dataToAdd);
@@ -54,14 +54,13 @@
 
 // export default CommentCreator;
 
-
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from 'axios'; // Ensure axios is imported
+import axios from "axios"; // Ensure axios is imported
 
 function CommentCreator() {
   const { id } = useParams();
-  const [reply, setReply] = useState(''); // State to hold the textarea value
+  const [reply, setReply] = useState(""); // State to hold the textarea value
 
   const handleChange = (e) => {
     setReply(e.target.value); // Update the reply state whenever the textarea changes
@@ -73,14 +72,17 @@ function CommentCreator() {
     console.log(id);
     try {
       const dataToAdd = {
-        reply: reply // Use the reply state value as the reply
-      };  
+        reply: reply, // Use the reply state value as the reply
+      };
 
-      const response = await axios.patch(`http://localhost:4000/api/v1/posts/comment/${id}`, dataToAdd);
+      const response = await axios.patch(
+        `http://localhost:4000/api/v1/posts/comment/${id}`,
+        dataToAdd
+      );
       console.log(response.data);
       // setPost(response.data); // Assuming setPost updates the state
       setTimeout(() => setLoading(false), 1000); // Assuming setLoading updates the state
-      setReply(''); // Optionally reset the textarea after submission
+      setReply(""); // Optionally reset the textarea after submission
     } catch (error) {
       console.error(error);
       // setLoading(false); // Assuming setLoading updates the state
@@ -92,7 +94,10 @@ function CommentCreator() {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit} className="flex flex-row md:items-start items-center p-10 text-xl">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-row md:items-start items-center p-10 text-xl"
+        >
           <textarea
             className="bg-gray-100 shadow-lg rounded font-herfonty resize-none w-full h-20 p-3 placeholder-gray-500 focus:outline-none focus:bg-white"
             name="body"
@@ -103,7 +108,7 @@ function CommentCreator() {
           ></textarea>
           <button
             type="submit"
-            className="font-herfonty text-lg bg-[rgba(135,116,162,0.4)] transition ease-in-out hover:bg-[rgba(135,116,162,0.85)] py-4 px-3 rounded-lg sm:w-[10rem] mt-4 ml-3"
+            className="font-herfonty text-lg bg-[rgba(135,116,162,0.4)] transition ease-in-out hover:bg-[rgba(135,116,162,0.85)] py-4 px-3 rounded-lg sm:w-[10rem] ml-3"
           >
             Post reply
           </button>

@@ -13,7 +13,7 @@ function SpecificPost() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("running the useEFect!")
+    console.log("running the useEFect!");
     setLoading(true);
     axios
       .get("http://localhost:4000/api/v1/posts/comment/" + id)
@@ -52,7 +52,7 @@ function SpecificPost() {
         </div>
       ) : (
         <>
-          <div className="flex flex-col px-10 bg-[rgba(135,116,162,0.4)] mt-9 rounded-3xl mx-8 py-5 gap-5 font-herfonty">
+          <div className="flex flex-col px-10 bg-[rgba(135,116,162,0.4)] mt-9 rounded-3xl mx-8 py-5 gap-5 font-herfonty text-[rgb(55,32,107)]">
             <div className="flex justify-between items-center text-2xl text-gray-600 text-opacity-25">
               <div className="flex items-center">
                 <Link
