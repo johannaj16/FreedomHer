@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
       });
-      setCurrentUser(response.data.user); // Assuming the user data is in response.data.user
+      //Note that response.data json object should be only returning the username and profileImage link. Ask aarush for more details
+      setCurrentUser(response.data); // Assuming the user data is in response.data.user
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
       throw error; // Rethrow the error to handle it in the component
@@ -33,7 +34,8 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
       });
-      setCurrentUser(response.data.user); // Set user data on successful registration
+      //Note that response.data json object should be only returning the username and profileImage link. Ask aarush for more details
+      setCurrentUser(response.data); // Set user data on successful registration
     } catch (error) {
       console.error(
         "Registration error:",
