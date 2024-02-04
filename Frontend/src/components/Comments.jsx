@@ -27,7 +27,7 @@ function Comments({ comments }) {
           key={item._id || index}
           className="flex justify-between p-5 bg-[rgba(135,116,162,0.4)] shadow-lg rounded-lg"
         >
-          <h1 className="text-lg">{item.reply}</h1>
+          <h1 className="text-lg pr-5">{item.reply}</h1>
           <p>{formatDate(item.createdAt)}</p>
         </div>
       ))}
