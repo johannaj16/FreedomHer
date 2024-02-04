@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg"; // Import the icon to match the Logi
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import RegisterSubPage from "./RegistrationSubPage";
-import ProfilePicPage from "./";
+import ProfilePicPage from "./ProfilePicSubPage";
 // Register
 function Register() {
   const [username, setUsername] = useState("");
