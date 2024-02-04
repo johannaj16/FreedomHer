@@ -24,7 +24,22 @@ const getPost = async (req, res) => {
     catch (error) {
     res.status(400).json({ error: error.message });
     }
-  };
+};
+
+//get all posts from a user
+const getAllPostsForUser = async (req, res) => {
+  //get all the comments, and then only get the ones that are by author
+  const { id } = req.params;
+  try{
+      // const coms = await commentData.find({});
+      const userPosts = await Post.find({ author: id });
+      console.log(userPosts);
+      res.status(200).json(userPosts)
+  }
+  catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+}
 
 //makes a post
 // const createPost = async (req, res) => {
@@ -219,4 +234,5 @@ module.exports = {
   likePost,
   addUpVote,
   updatePost,
+  getAllPostsForUser,
 };
