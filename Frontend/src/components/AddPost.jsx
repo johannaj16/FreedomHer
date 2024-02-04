@@ -28,8 +28,9 @@ function AddPost({ isModalOpen, setIsModalOpen }) {
       await axios.post("http://localhost:4000/api/v1/posts/", {
         title,
         genre,
-        description,
+        content: description,
       });
+      
       setTitle("");
       setGenre("");
       setDescription("");
