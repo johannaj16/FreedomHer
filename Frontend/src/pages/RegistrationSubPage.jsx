@@ -1,24 +1,22 @@
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+
 function RegisterSubPage({
   setUsername,
   setPassword,
   username,
   password,
-  setRegistrationStep,
   isNotConfirmed,
   confirmPassword,
   setConfirmPassword,
+  handleNextStep, // Added this prop
 }) {
   return (
     <div className="bg-white w-4/5 max-w-[620px] p-10 rounded-xl">
       <h1 className="font-herfonty text-4xl text-pink-600 uppercase flex justify-center items-center gap-2">
         Register <CgProfile size={45} />
       </h1>
-      <form
-        onSubmit={setRegistrationStep(2)}
-        className="flex flex-col gap-10 pt-10 font-herfonty"
-      >
+      <form className="flex flex-col gap-10 pt-10 font-herfonty">
         <input
           type="text"
           id="username"
@@ -50,7 +48,8 @@ function RegisterSubPage({
           }`}
         />
         <button
-          type="submit"
+          type="button" // Changed type to "button"
+          onClick={handleNextStep} // Added click handler
           className="bg-pink-600 rounded-lg p-3 text-xl font-bold text-white hover:bg-pink-700"
         >
           Next

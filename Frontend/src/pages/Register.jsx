@@ -1,81 +1,71 @@
-import { useState } from "react";
-import { CgProfile } from "react-icons/cg"; // Import the icon to match the Login page
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import RegisterSubPage from "./RegistrationSubPage";
-import ProfilePicPage from "./ProfilePicSubPage";
-// Register
+import ProfilePicSubPage from "./ProfilePicSubPage";
+
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isNotConfirmed, setIsNotConfirmed] = useState(false);
-  const { register } = useAuth();
-  const navigate = useNavigate();
   const [registrationStep, setRegistrationStep] = useState(1);
   const [profileImage, setProfileImage] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
-    //
-    if (username.length === 0) {
-      return;
-    }
-
-    if (!profileImage) {
-      return;
-    }
-    // Check if passwords match
-    const passwordsMatch = password === confirmPassword;
-
-    // Update the confirmation state based on the match
-    setIsNotConfirmed(!passwordsMatch);
-
-    if (!passwordsMatch) {
-      return;
-    }
-
-    try {
-      //register
-      await register(profileImage, username, password);
-
-      //GO home baby
-      navigate("/");
-    } catch (error) {
-      console.error("Registration error:", error);
-      // Handle errors (like showing a message to the user)
+  const handleNextStep = () => {
+    if (registrationStep === 1 && password !== confirmPassword) {
+      setIsNotConfirmed(true);
+    } else {
+      setIsNotConfirmed(false);
+      setRegistrationStep(2);
     }
   };
 
-  const renderStep = () => {
-    switch (registrationStep) {
-      case 1:
-        return (
-          <RegisterSubPage
-            isNotConfirmed={isNotConfirmed}
-            username={username}
-            password={password}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            setConfirmPassword={setConfirmPassword}
-            setRegistrationStep={setRegistrationStep}
-          />
-        );
-      case 2:
-        return (
-          <ProfilePicPage
-            setProfileImage={setProfileImage}
-            handleSubmit={handleSubmit}
-          />
-        );
-      default:
-        return <div>Invalid step</div>;
+  const handlePreviousStep = () => {
+    setRegistrationStep(1);
+  };
+
+  const handleSubmit = async () => {
+    if (registrationStep === 2) {
+      try {
+        await register({ username, password, profileImage });
+        navigate("/");
+      } catch (error) {
+        console.error("Registration error:", error);
+      }
     }
   };
 
+  const profileImageOptions = [
+    "url-to-profile-pic-1",
+    "url-to-profile-pic-2",
+    "url-to-profile-pic-3",
+    "url-to-profile-pic-4",
+    "url-to-profile-pic-5",
+  ];
   return (
     <main className="flex justify-center items-center py-40">
-      {renderStep()}
+      {registrationStep === 1 ? (
+        <RegisterSubPage
+          setUsername={setUsername}
+          setPassword={setPassword}
+          username={username}
+          password={password}
+          isNotConfirmed={isNotConfirmed}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+          handleNextStep={handleNextStep}
+        />
+      ) : (
+        <ProfilePicSubPage
+          setProfileImage={setProfileImage}
+          handleSubmit={handleSubmit}
+          profileImageOptions={profileImageOptions}
+          handlePreviousStep={handlePreviousStep}
+        />
+      )}
     </main>
   );
 }
