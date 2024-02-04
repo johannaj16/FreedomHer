@@ -8,20 +8,17 @@ const {
   updatePost,
 } = require("../controllers/postController");
 
-const {
-  makeComment,
-  addComment,
-} = require("../controllers/commentController");
+const { makeComment, addComment } = require("../controllers/commentController");
 const router = express.Router();
 
 router.route("/").get(getAllPosts);
 router.route("/:id").get(getPost);
 router.route("/").post(authenticateUser, makePost);
-router.route("/upvote:id").patch(authenticateUser, addUpVote);
+router.route("/upvote/:id").patch(authenticateUser, addUpVote);
 router.route("/:id").patch(authenticateUser, updatePost);
-// router.route("/updatePost").patch(updatePost);
-router.route("/comment/:id").patch(addComment);
+// router.route("/updatePost").patch(authenticateUser,updatePost);
+router.route("/comment/:id").patch(authenticateUser, addComment);
 
-router.route("/comment").post(makeComment);
+router.route("/comment").post(authenticateUser, makeComment);
 
 module.exports = router;

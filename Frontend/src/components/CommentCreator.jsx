@@ -4,14 +4,16 @@ function CommentCreator() {
   return (
     <>
       <div>
-        <div className="px-10 py-10 text-xl">
+        <div className="flex flex-col md:items-start items-center p-10 text-xl">
           <textarea
-            class="bg-gray-100 rounded border border-gray-400 font-herfonty leading-normal resize-none w-full h-20 py-3 px-3 placeholder-gray-700 focus:outline-none focus:bg-white"
+            class="bg-gray-100 shadow-lg rounded font-herfonty resize-none w-full h-20 p-3 placeholder-gray-500 focus:outline-none focus:bg-white"
             name="body"
-            placeholder="Type Your replySS"
+            placeholder="Your reply"
             required
           ></textarea>
-          <button className="bg-red-600 p-7">add butt</button>
+          <button className="font-herfonty text-lg bg-[rgba(135,116,162,0.4)] transition ease-in-out hover:bg-[rgba(135,116,162,0.85)] py-4 px-3 rounded-lg sm:w-[10rem] mt-4 ml-3">
+            Post reply
+          </button>
         </div>
       </div>
     </>
