@@ -9,6 +9,7 @@ const createJWT = ({ payload }) => {
 
 const isTokenValid = ({ token }) => {
   try {
+    console.log(token);
     return jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
     console.error("Token verification error:", error.message);
@@ -24,7 +25,7 @@ const attachCookiesToResponse = ({ res, user }) => {
   res.cookie("token", token, {
     httpOnly: true, // To prevent XSS attacks
     expires: new Date(Date.now() + oneDay), // Cookie expiration
-    secure: process.env.NODE_ENV === "production", // Set to true in production
+    secure: false, // Set to true in production
     signed: true, // If using signed cookies
     sameSite: "None", // Adjust depending on cross-site access needs
   });

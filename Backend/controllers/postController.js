@@ -48,16 +48,17 @@ const getPost = async (req, res) => {
 
 const makePost = async (req, res) => {
     const { title, content, genre, comments } = req.body; //req.body is params coming in from front end
+    const {userId} = req.user;
     vote = 0;
     try {
       const post = await Post.create({
+        author: userId,
         title,
         content,
         vote,
         genre,
         comments,
-        // author: userID
-      });
+    });
       return res.status(200).json(post);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -205,6 +206,9 @@ const likePost = async (req, res) => {
   const jsonPost = post.toObject();
   res.status(StatusCodes.OK).json({ jsonPost });
 };
+
+
+
 
 
 module.exports = {
