@@ -21,6 +21,7 @@ const makeComment = async (req, res) => {
 const addComment = async (req, res) => {
   const { id: post_id } = req.params;
   const { reply } = req.body;
+  console.log(req.user);
   const userId = req.user.userId; // Adjust according to your authentication implementation
 
   if (!mongoose.Types.ObjectId.isValid(post_id)) {
@@ -33,7 +34,7 @@ const addComment = async (req, res) => {
       return res.status(404).json({ Error: "Post not found" });
     }
 
-    const newComment = await Comment.create({
+    const newComment = await commentData.create({
       reply,
       author: userId, // Ensure this matches your Comment schema
     });
