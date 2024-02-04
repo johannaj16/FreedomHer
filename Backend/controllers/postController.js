@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { StatusCodes } = require("http-status-codes");
 const Post = require("../models/postData");
 const CustomError = require("../errors");
@@ -17,8 +18,8 @@ const getAllPosts = async (req, res) => {
 const getPost = async (req, res) => {
     try{
         const { id } = req.params;
-        const posts = await postData.findById(id);
-        return res.status(200).json(posts);
+        const thePost = await Post.findById(id);
+        return res.status(200).json(thePost);
       }
     catch (error) {
     res.status(400).json({ error: error.message });
@@ -66,54 +67,55 @@ const makePost = async (req, res) => {
 const addUpVote = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(200).json({ Error: "Post can't be found" });
-      }
+      return res.status(404).json({ Error: "Post can't be found" });
+    }
     try {
-        const {title, content, vote, genre, comments} = req.body;
-    
-      const post = await Post.findOneAndUpdate(
+      // Directly increment the vote field using $inc operator
+      const updatedPost = await Post.findOneAndUpdate(
         { _id: id },
-        {
-          title, content, vote: vote + 1, genre, comments
-        }
+        { $inc: { vote: 1 } }, // Increment vote by 1
+        { new: true } // Return the updated document
       );
-        return res.status(200).json(vote + 1);
+      if (!updatedPost) {
+        return res.status(404).json({ Error: "Post can't be found" });
+      }
+      // Return the updated vote count
+      return res.status(200).json(updatedPost.vote);
+    } catch (error) {
+      res.status(500).json({ message: "Server Error" });
     }
-    catch (error) {
-        res.status(500).json({ message: "Server Error" });
-    }
-}
+};
+  
 
 
+const updatePost = async (req, res) => {
+  const { userId } = req.user;
+  const { id: post_id } = req.params;
+  const { title, description } = req.body;
+  const post = await Post.findOne({ _id: post_id });
 
-// const updatePost = async (req, res) => {
-//   const { userId } = req.user;
-//   const { id: post_id } = req.params;
-//   const { title, description } = req.body;
-//   const post = await Post.findOne({ _id: post_id });
+  if (!post) {
+    throw new CustomError.NotFoundError(
+      `Post wasnt found with id : ${post_id} `
+    );
+  }
 
-//   if (!post) {
-//     throw new CustomError.NotFoundError(
-//       `Post wasnt found with id : ${post_id} `
-//     );
-//   }
+  if (String(userId) !== String(post.userId)) {
+    throw new CustomError.UnauthorizedError(
+      `Ownership of post belongs to someone else`
+    );
+  }
 
-//   if (String(userId) !== String(post.userId)) {
-//     throw new CustomError.UnauthorizedError(
-//       `Ownership of post belongs to someone else`
-//     );
-//   }
+  post.title = title;
+  post.description = description;
+  await post.save();
 
-//   post.title = title;
-//   post.description = description;
-//   await post.save();
+  const postObject = post.toObject();
+  const { likes } = postObject;
+  delete postObject.updatedAt;
 
-//   const postObject = post.toObject();
-//   const { likes } = postObject;
-//   delete postObject.updatedAt;
-
-//   res.status(StatusCodes.OK).json({ ...postObject, likes: likes.length });
-// };
+  res.status(StatusCodes.OK).json({ ...postObject, likes: likes.length });
+};
 
 const editPost = async (req, res) => {
     const { id } = req.params;
@@ -212,4 +214,5 @@ module.exports = {
   deletePost,
   likePost,
   addUpVote,
+  updatePost,
 };
