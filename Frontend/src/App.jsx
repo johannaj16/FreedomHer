@@ -13,7 +13,7 @@ import SpecificPost from "./pages/SpecificPost";
 import { AuthProvider } from "./context/authContext";
 import { useAuth } from "./context/authContext.jsx";
 function App() {
-  return (
+  return  (
     <AuthProvider>
       <AuthInitializer />
       <BrowserRouter>
