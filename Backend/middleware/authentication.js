@@ -1,12 +1,14 @@
 const CustomError = require("../errors");
-const { isTokenValid } = require("../utils");
+const { isTokenValid } = require("../utils/jwt");
 
 const authenticateUser = async (req, res, next) => {
   const token = req.signedCookies.token;
-  console.log(req.signedCookies, "LLOOOOK HERE");
+  console.log(req.signedCookies);
   if (!token) {
-    throw new CustomError.UnauthenticatedError(
-      "Authentication Invalid | JWT Cookie not found"
+    return next(
+      new CustomError.UnauthenticatedError(
+        "Authentication Invalid | JWT Cookie not found"
+      )
     );
   }
 
@@ -15,8 +17,10 @@ const authenticateUser = async (req, res, next) => {
     req.user = { name, userId, role };
     next();
   } catch (error) {
-    throw new CustomError.UnauthenticatedError(
-      "Authentication Invalid | Invalid JWT Token from Cookie"
+    next(
+      new CustomError.UnauthenticatedError(
+        "Authentication Invalid | Invalid JWT Token from Cookie"
+      )
     );
   }
 };
@@ -24,8 +28,8 @@ const authenticateUser = async (req, res, next) => {
 const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      throw new CustomError.UnauthorizedError(
-        "Unauthorized to access this route"
+      return next(
+        new CustomError.UnauthorizedError("Unauthorized to access this route")
       );
     }
     next();
