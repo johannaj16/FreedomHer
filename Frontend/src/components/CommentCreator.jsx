@@ -4,7 +4,7 @@ function CommentCreator() {
   return (
     <>
       <div>
-        <div className="flex flex-col md:items-start items-center p-10 text-xl">
+        <div className="flex flex-row md:items-start items-center p-10 text-xl">
           <textarea
             class="bg-gray-100 shadow-lg rounded font-herfonty resize-none w-full h-20 p-3 placeholder-gray-500 focus:outline-none focus:bg-white"
             name="body"
