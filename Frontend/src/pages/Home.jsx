@@ -36,7 +36,7 @@ function Home() {
         </div>
         <Link
           to="/forum"
-          className="bg-[rgba(132,62,250,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] mt-[4rem] text-purple text-3xl font-bold py-10 px-10 md:w-[17rem] rounded mx-auto"
+          className="bg-[rgba(132,62,50,0.3)] font-herfonty transition ease-in-out hover:bg-[rgba(132,62,250,0.9)] mt-[4rem] text-purple text-3xl font-bold py-10 px-10 md:w-[17rem] rounded mx-auto"
         >
           Go to forum
         </Link>
