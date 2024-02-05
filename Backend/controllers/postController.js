@@ -67,10 +67,11 @@ const makePost = async (req, res) => {
     const {userId} = req.user;
     vote = 0;
 
-    const user = User.findById(userId);
-
+    // const user = User.findById(userId);
+    const user = await User.findById(userId);
+    
     const { profileImage } = user;
-
+    console.log("theeee userrr: " + profileImage);
     try {
       const post = await Post.create({
         profileImage,

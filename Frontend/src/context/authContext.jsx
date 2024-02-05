@@ -48,9 +48,6 @@ export const AuthProvider = ({ children }) => {
   // Function to handle logout
   const logout = async () => {
     try {
-      await axios.get(`${BASE_URL}/api/v1/users/logout`, {
-        withCredentials: true, // Add withCredentials here
-      });
       setCurrentUser(null);
     } catch (error) {
       console.error("Logout error:", error.response?.data || error.message);
